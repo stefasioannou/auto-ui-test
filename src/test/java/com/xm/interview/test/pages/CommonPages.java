@@ -384,9 +384,11 @@ public class CommonPages {
     public static void navigateToReadMore(WebDriver driver, String stockSymbol) {
 
         Map<String, String> stockData = Config.entries;
+        // Find the stock data entry for the given stock symbol
         if (stockData != null) {
             System.out.println("Stock data found for symbol: " + stockSymbol);
             String readMoreHref = stockData.get("ReadmoreHref");
+            // Navigate to the "Read More" link associated with the stock symbol
             if (readMoreHref != null && !readMoreHref.isEmpty()) {
                 System.out.println("Navigating to ReadmoreHref: " + readMoreHref);
                 driver.navigate().to(readMoreHref);
@@ -423,6 +425,7 @@ public class CommonPages {
         Assert.assertTrue(matcher.find(), "No match found.");
         int totalEntries = Integer.parseInt(matcher.group(1));
 
+        // Compare the total number of entries with the expected number
         Assert.assertEquals(totalEntries, Config.entriesSize, "Total entries found in table do not match the size of all entries count");
         System.out.println("---------------------------------------------------");
     }
@@ -437,6 +440,7 @@ public class CommonPages {
         List<WebElement> tradingRows = driver.findElements(By.xpath("//div[@class='container']//tr"));
         Map<String, String> data = new HashMap<>();
 
+        // Extract the trading conditions data from the web page
         for (WebElement row : tradingRows) {
             String header = "";
             String value = "";
@@ -518,6 +522,7 @@ public class CommonPages {
         String actualUrl = driver.getCurrentUrl();
         String actualTitle = driver.getTitle();
 
+        // Verify that the actual URL and title match the expected values
         assert actualUrl.equals(expectedUrl) : "Expected URL: " + expectedUrl + " but got: " + actualUrl;
         assert actualTitle.contains(expectedTitle) : "Expected title to contain: " + expectedTitle + " but got: " + actualTitle;
     }
