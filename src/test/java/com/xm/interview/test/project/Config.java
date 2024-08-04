@@ -1,7 +1,5 @@
 package com.xm.interview.test.project;
 
-import org.openqa.selenium.WebElement;
-
 import java.util.Map;
 
 /**
