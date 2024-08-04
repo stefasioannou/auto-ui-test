@@ -1,9 +1,14 @@
 package com.xm.interview.test.base;
 
 import com.xm.interview.test.project.Config;
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+
 import java.util.logging.Logger;
 
 public class BaseTest {
@@ -17,7 +22,8 @@ public class BaseTest {
      */
     @BeforeClass
     public static void setUp() {
-        driver = WebDriverFactory.getDriver();
+        String browserDriver = System.getProperty("Browser", "chrome");
+        driver = WebDriverFactory.getDriver(browserDriver);
         if (driver == null) {
             logger.severe("Failed to initialize the WebDriver!");
             throw new RuntimeException("Failed to initialize the WebDriver!");

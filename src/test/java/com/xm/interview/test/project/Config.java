@@ -7,7 +7,6 @@ import java.util.Map;
  */
 public class Config {
 
-    public static final String chromeDriverPath = "drivers\\chromedriver.exe";
     public static final String websiteURL = "https://www.xm.com";
     public static final String symbolName = "Orkla ASA (ORK.OL)";
     public static final String country = "Norway";

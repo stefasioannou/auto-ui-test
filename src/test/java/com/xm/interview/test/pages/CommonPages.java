@@ -58,11 +58,10 @@ public class CommonPages {
      *
      * @param driver            The WebDriver instance.
      * @param locator           The locator used to find the elements.
-     * @param timeoutInSeconds  The maximum time to wait for the elements to become clickable, in seconds.
      * @return A list of WebElements that became clickable.
      */
-    private static List<WebElement> waitUntilElementsAreClickable(WebDriver driver, By locator, int timeoutInSeconds) {
-        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+    private static List<WebElement> waitUntilElementsAreClickable(WebDriver driver, By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_IN_SECONDS));
         return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
@@ -93,7 +92,7 @@ public class CommonPages {
                     element
             );
 
-            WebDriverWait wait = new WebDriverWait(driver, TIMEOUT_IN_SECONDS);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_IN_SECONDS));
             wait.until(ExpectedConditions.elementToBeClickable(element));
 
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
@@ -177,7 +176,7 @@ public class CommonPages {
         clickElement(driver, norwayFilter);
         waitUntilPageLoadComplete(driver);
         By activeNorwayFilterLocator = By.xpath(".//*[@type='button'][contains(@class,'active')][@data-value='" + country + "']");
-        WebElement activeNorwayFilter = new WebDriverWait(driver, TIMEOUT_IN_SECONDS)
+        WebElement activeNorwayFilter = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_IN_SECONDS))
                 .until(ExpectedConditions.visibilityOfElementLocated(activeNorwayFilterLocator));
         if (activeNorwayFilter.isDisplayed()) {
             System.out.println("Norway filteris now active");
@@ -217,7 +216,7 @@ public class CommonPages {
                 rowCell
         );
         if (beforeContent != null && !beforeContent.isEmpty() && !beforeContent.equals("none")) {
-            List<WebElement> expandTabs = waitUntilElementsAreClickable(driver, By.xpath(".//*[@data-xm-qa-name='symbolWithDescription']"), TIMEOUT_IN_SECONDS);
+            List<WebElement> expandTabs = waitUntilElementsAreClickable(driver, By.xpath(".//*[@data-xm-qa-name='symbolWithDescription']"));
             for (WebElement expandTab : expandTabs) {
                 clickElement(driver, expandTab);
                 waitUntilPageLoadComplete(driver);
